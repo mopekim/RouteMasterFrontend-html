@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <div v-for="(item, index) in indexVM" :key="index" class="card mb-3">
+      <!-- ... card content ... -->
+
+      <div class="card-body bg-light">
+        <!-- ... other card content ... -->
+
+        <ul v-if="item.imageList.length" class="d-flex list-unstyled mb-3">
+          <li v-for="(photo, num) in item.imageList" :key="num" class="me-3">
+            <img :src="getImgPath(photo)" style="height: 80px; width: 80px; cursor: pointer;"
+              @click="openImageModal(item.imageList, num)" />
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Image Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="imageModalLabel">Image Gallery</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div id="imageCarousel" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div v-for="(photo, num) in modalImageList" :key="num"
+                  :class="['carousel-item', num === 0 ? 'active' : '']">
+                  <img :src="getImgPath(photo)" class="d-block w-100" alt="Photo">
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#imageCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#imageCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    export default {
+      data() {
+        return {
+          modalImageList: [],
+        };
+      },
+      methods: {
+        getImgPath(photo) {
+          // Return the path to your images based on the photo data
+          return photo;
+        },
+        openImageModal(imageList, startIndex) {
+          this.modalImageList = imageList;
+          const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
+          imageModal.show();
+          const carousel = new bootstrap.Carousel(document.getElementById('imageCarousel'), {
+            interval: false,
+            wrap: false,
+            keyboard: true,
+          });
+          carousel.to(startIndex);
+        },
+      },
+    };
+  </script>
+</body>
+
+</html>

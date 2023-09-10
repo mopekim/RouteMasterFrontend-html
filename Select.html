@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <label for="commentOrder">排序選擇:</label>
+        <select v-model="selected" id="commentOrder">
+            <option value="">請選擇</option>
+            <option value="1">選項1</option>
+            <option value="2">選項2</option>
+            <option value="3">選項3</option>
+        </select>
+        <p>選到的選項value為:{{ selected }}</p>
+    </div>
+    <script src="https://unpkg.com/vue@3.2.36/dist/vue.global.js"></script>
+    <script>
+        var vueApp = {
+            data() {
+                return {
+                    selected: ""
+                }
+
+            }
+        };
+        const app = Vue.createApp(vueApp).mount("#app");
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .panel ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .panel li {
+            color: #ccc;
+        }
+
+        .panel li.active {
+            color: #ff0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="panel">
+        <ul>
+            <li><i class="fa fa-star fa-fw"></i></li>
+            <li><i class="fa fa-star fa-fw"></i></li>
+            <li><i class="fa fa-star fa-fw"></i></li>
+            <li><i class="fa fa-star fa-fw"></i></li>
+            <li><i class="fa fa-star fa-fw"></i></li>
+        </ul>
+        <div class="tip">請點選分數</div>
+        <div class="result" id="indicator">4</div>
+    </div>
+    <script src="https://kit.fontawesome.com/ad2e9fef09.js" crossorigin="anonymous"></script>
+    <script>
+        var li = document.getElementsByClassName("fa-star");
+        var num = document.getElementById("indicator").textContent;
+        function megShow() {
+            alert(li.length);
+        };
+        megShow();
+
+        for (let i = 0; i < num; i++) {
+            li[i].style.color = "red";
+        }
+    </script>
+</body>
+
+</html>

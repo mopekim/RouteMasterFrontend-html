@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .panel ul {
+            display: flex;
+            list-style: none;
+        }
+
+        .panel li {
+            cursor: pointer;
+        }
+
+        /*請注意, 這三個css 撰寫順序不能亂調整, active最後寫,所以會覆蓋前面二個*/
+        .panel li.blank {
+            color: #ccc;
+        }
+
+        .panel li.hover {
+            color: #ff0;
+        }
+
+        .panel li.active {
+            color: #f90;
+        }
+
+        .tip,
+        .result {
+            margin-top: 10px;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="panel mb-3">
+        <div class="tip">請點選分數</div>
+        <div class="result"></div>
+        <ul>
+            <li><i class="fa fa-star fa-fw"></i></li>
+            <li><i class="fa fa-star fa-fw"></i></li>
+            <li><i class="fa fa-star fa-fw"></i></li>
+            <li><i class="fa fa-star fa-fw"></i></li>
+            <li><i class="fa fa-star fa-fw"></i></li>
+        </ul>
+    </div>
+    <script src="https://kit.fontawesome.com/ad2e9fef09.js" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var panel = document.querySelector(".panel");
+            var result = panel.querySelector(".result");
+            var liItems = panel.querySelectorAll("li");
+
+            result.style.display = "none";
+
+            liItems.forEach(function (liItem, index) {
+                liItem.classList.add("blank");
+
+                liItem.addEventListener("mouseover", function () {
+                    for (var j = 0; j <= index; j++) {
+                        liItems[j].classList.remove("blank");
+                        liItems[j].classList.add("hover");
+                    }
+                });
+
+                liItem.addEventListener("mouseout", function () {
+                    liItems.forEach(function (item) {
+                        item.classList.remove("hover");
+                        item.classList.add("blank");
+                    });
+                });
+
+                liItem.addEventListener("click", function () {
+                    liItems.forEach(function (item, idx) {
+                        if (idx <= index) {
+                            item.classList.remove("blank");
+                            item.classList.add("active");
+                        } else {
+                            item.classList.remove("active");
+                            item.classList.add("blank");
+                        }
+                    });
+                    panel.querySelector(".tip").style.display = "none";
+                    var points = index + 1;
+                    result.style.display = "block";
+                    result.textContent = "您選擇了 " + points + " 分";
+
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

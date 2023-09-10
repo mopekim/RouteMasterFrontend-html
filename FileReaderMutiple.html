@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="#" enctype="multiple/form-data">
+        <label for="">選取檔案</label>
+        <input type="file" id="imgFile" name="file1" multiple accept="img/*">
+        <div id="ImgShow"></div>
+    </form>
+
+    <script>
+        window.onload = function () {
+            var imgList = [];
+            imgList = document.getElementById("#imgFile");
+            var countNum = imgList.length;
+            console.log(countNum);
+
+            var fileType = "img.*";
+            imgList.addEventListener("change", () => {
+
+            });
+        };
+    </script>
+
+</body>
+
+</html>
